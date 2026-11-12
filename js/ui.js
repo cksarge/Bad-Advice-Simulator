@@ -154,7 +154,6 @@ export function renderTitle({ save, storageOk }) {
           ${storageOk ? "" : `<p class="note">⚠️ Your browser isn't letting this page save. You can still play, but progress won't be remembered.</p>`}
         </nav>
       </div>
-      <div class="coffee-ring coffee-ring--title" aria-hidden="true"></div>
     </section>`,
     "screen--title",
   );
