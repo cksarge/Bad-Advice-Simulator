@@ -4,9 +4,9 @@
 
 Every day, letters from the town's readers land on your desk: a llama farmer whose llamas are plotting against him, an 81-year-old who treats bingo as a blood sport, a mayor with "hypothetical" problems, a ghost nobody notices. You pick their advice. The next morning you read what happened. Sometimes it's what you hoped. Usually it's what you deserved.
 
-![Screenshot of Bad Advice Simulator](assets/screenshot-placeholder.svg)
-
-<sub>Placeholder image. Swap in a real screenshot by saving one as `assets/screenshot.png` and updating the line above.</sub>
+| Your desk | The morning paper |
+| --- | --- |
+| ![The desk: three envelopes, one stamped ANSWERED, a coffee mug and a sticky note](assets/screenshot-desk.jpg) | ![Reader Updates: newspaper clippings showing how your advice turned out](assets/screenshot-morning.jpg) |
 
 ---
 
@@ -49,7 +49,7 @@ Then open <http://localhost:8000>.
 **Option C: VS Code**
 Install the **Live Server** extension, right-click `index.html`, and choose **Open with Live Server**.
 
-There's no build step and no dependencies. Edit a file, refresh, done.
+There's no build step and no dependencies. Edit a file, refresh, done. Everything, including the fonts, is in the repo, so once the page has loaded it needs no internet connection.
 
 ---
 
@@ -151,6 +151,7 @@ Add an entry to `data/events.js` (front-page story, day window, chance), and giv
 .
 ├── index.html              Page skeleton: dashboard, screen container, dialogs
 ├── css/
+│   ├── fonts.css           @font-face rules for the self-hosted fonts
 │   ├── base.css            Design tokens (colors, fonts), reset, wooden desk background, buttons, dialogs
 │   ├── dashboard.css       The sticky stat meters at the top
 │   ├── newspaper.css       Masthead, headlines, reader-update clippings, Around Town sidebar
@@ -175,9 +176,10 @@ Add an entry to `data/events.js` (front-page story, day window, chance), and giv
 │   ├── filler.js           "Around Town" news briefs
 │   └── balance.js          All the tuning numbers
 └── assets/
+    ├── fonts/              Self-hosted .woff2 fonts (latin + latin-ext) and their LICENSES/
     ├── icons/favicon.svg
     ├── textures/           Paper and wood-grain noise (tiny SVGs)
-    └── screenshot-placeholder.svg
+    └── screenshot-*.jpg    README screenshots
 ```
 
 `engine.js`, `state.js`, `endings.js` and the `data/` files never touch the DOM, so you can import them in Node to simulate thousands of games when you're balancing.
@@ -187,8 +189,13 @@ Add an entry to `data/events.js` (front-page story, day window, chance), and giv
 ## Credits & license
 
 - **Game design, writing, and code:** the Bad Advice Simulator project, released under the [MIT License](LICENSE).
-- **Fonts** (loaded from Google Fonts; the game falls back to system fonts offline):
-  - [UnifrakturCook](https://fonts.google.com/specimen/UnifrakturCook), [Playfair Display](https://fonts.google.com/specimen/Playfair+Display), [Old Standard TT](https://fonts.google.com/specimen/Old+Standard+TT), and [Caveat](https://fonts.google.com/specimen/Caveat): SIL Open Font License 1.1
-  - [Special Elite](https://fonts.google.com/specimen/Special+Elite): Apache License 2.0
+- **Fonts** (self-hosted in `assets/fonts/`, originally from Google Fonts; full license texts in `assets/fonts/LICENSES/`):
+  - [UnifrakturCook](https://fonts.google.com/specimen/UnifrakturCook) © 2010 j. 'mach' wust: SIL Open Font License 1.1
+  - [Playfair Display](https://fonts.google.com/specimen/Playfair+Display) © 2017 The Playfair Display Project Authors: SIL Open Font License 1.1
+  - [Old Standard TT](https://fonts.google.com/specimen/Old+Standard+TT) © 2011 The Old Standard Project Authors: SIL Open Font License 1.1
+  - [Caveat](https://fonts.google.com/specimen/Caveat) © 2014 The Caveat Project Authors: SIL Open Font License 1.1
+  - [Special Elite](https://fonts.google.com/specimen/Special+Elite) by Astigmatic: Apache License 2.0
+
+  The font files are distributed under their own licenses, not the project's MIT License.
 - **Art:** all visuals (coffee rings, paper, desk clutter, stamps) are CSS or small original SVGs included in this repo and covered by the MIT License. Character icons are the visitor's system emoji.
 - All characters and places are fictional. Any resemblance to real llamas is coincidental.
