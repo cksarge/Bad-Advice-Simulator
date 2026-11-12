@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Bad Advice Simulator · The Daily Shrug</title>
+    <meta name="description" content="Be the new advice columnist at a struggling small-town newspaper. Give terrible advice. Read the consequences." />
+    <meta name="theme-color" content="#3b2a1e" />
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
+
+    <!-- Fonts (Google Fonts, SIL Open Font License / Apache 2.0). The game falls back to system fonts offline. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@700;900&family=Special+Elite&family=UnifrakturCook:wght@700&display=swap"
+    />
+
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="css/newspaper.css" />
+    <link rel="stylesheet" href="css/desk.css" />
+    <link rel="stylesheet" href="css/letters.css" />
+    <link rel="stylesheet" href="css/screens.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body>
+    <!-- Stat meters. Hidden on the title screen. -->
+    <header id="dashboard" class="dashboard" hidden>
+      <div class="dash-brand">
+        <span class="dash-masthead">The Daily Shrug</span>
+        <span class="dash-day" id="dash-day">Day 1</span>
+      </div>
+      <div class="meters">
+        <div class="meter" data-stat="readership" role="meter" aria-label="Readership" aria-valuemin="0" aria-valuemax="100">
+          <span class="meter-label"><span aria-hidden="true">📰</span> Readership</span>
+          <span class="meter-track"><span class="meter-fill"></span></span>
+          <span class="meter-value">0</span>
+        </div>
+        <div class="meter" data-stat="reputation" role="meter" aria-label="Reputation" aria-valuemin="0" aria-valuemax="100">
+          <span class="meter-label"><span aria-hidden="true">🤝</span> Reputation</span>
+          <span class="meter-track"><span class="meter-fill"></span></span>
+          <span class="meter-value">0</span>
+        </div>
+        <div class="meter" data-stat="chaos" role="meter" aria-label="Chaos" aria-valuemin="0" aria-valuemax="100">
+          <span class="meter-label"><span aria-hidden="true">🔥</span> Chaos</span>
+          <span class="meter-track"><span class="meter-fill"></span></span>
+          <span class="meter-value">0</span>
+        </div>
+      </div>
+      <button class="icon-button" data-action="menu" aria-label="Open menu">☰</button>
+    </header>
+
+    <!-- Every screen (title, morning paper, desk, ending…) is drawn in here by js/ui.js. -->
+    <main id="screen" class="screen" aria-live="polite"></main>
+
+    <!-- Reading a letter -->
+    <dialog id="letter-dialog" class="letter-dialog"></dialog>
+
+    <!-- In-game menu -->
+    <dialog id="menu-dialog" class="menu-dialog">
+      <nav class="menu-paper" aria-label="Game menu">
+        <h2 class="menu-title">Menu</h2>
+        <button class="btn btn-primary" data-action="menu-close" autofocus>Back to Work</button>
+        <button class="btn" data-action="how-to-play">How to Play</button>
+        <button class="btn" data-action="hall-of-fame">Hall of Fame</button>
+        <button class="btn" data-action="retire" hidden>Retire (See Ending)</button>
+        <button class="btn btn-danger" data-action="restart">Restart Game</button>
+        <button class="btn btn-ghost" data-action="title">Save &amp; Quit to Title</button>
+      </nav>
+    </dialog>
+
+    <!-- Yes/no questions -->
+    <dialog id="confirm-dialog" class="confirm-dialog"></dialog>
+
+    <!-- The "PUBLISHED" stamp animation -->
+    <div id="publish-overlay" class="publish-overlay" hidden></div>
+
+    <noscript>
+      <p class="noscript">Bad Advice Simulator needs JavaScript turned on. Marge apologizes for nothing.</p>
+    </noscript>
+  </body>
+</html>

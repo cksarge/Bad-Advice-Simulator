@@ -1,0 +1,142 @@
+/* letters.css — an opened letter (typewritten, on lined paper) and the reply options. */
+
+.letter-dialog {
+  width: min(680px, calc(100vw - 24px));
+}
+
+.letter-paper {
+  position: relative;
+  max-height: calc(100dvh - 24px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 34px clamp(18px, 5vw, 48px) 28px clamp(28px, 7vw, 64px);
+  font-family: var(--font-type);
+  font-size: 1.02rem;
+  line-height: 1.75;
+  background-color: #fbf7ea;
+  background-image:
+    /* red margin line */
+    linear-gradient(90deg, transparent calc(clamp(18px, 5vw, 46px)), rgba(200, 60, 50, 0.35) calc(clamp(18px, 5vw, 46px)), rgba(200, 60, 50, 0.35) calc(clamp(18px, 5vw, 46px) + 2px), transparent calc(clamp(18px, 5vw, 46px) + 2px)),
+    /* ruled lines */
+    repeating-linear-gradient(to bottom, transparent 0 calc(1.75em - 1px), rgba(70, 110, 170, 0.18) calc(1.75em - 1px) 1.75em),
+    var(--paper-texture);
+  background-attachment: local;
+  border-radius: 3px;
+  box-shadow: var(--shadow-lift);
+}
+/* A coffee stain on every letter, because of course */
+.letter-paper::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  right: -26px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, transparent 55%, var(--coffee) 58%, rgba(110, 72, 40, 0.1) 65%, transparent 69%);
+  pointer-events: none;
+}
+
+.dialog-close {
+  position: sticky;
+  top: 0;
+  float: right;
+  margin: -18px -10px 0 0;
+  width: 40px;
+  height: 40px;
+  font-size: 1.6rem;
+  line-height: 1;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.letter-meta {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+.letter-subject {
+  font-family: var(--font-hand);
+  font-size: 2rem;
+  line-height: 1.1;
+  margin: 2px 0 14px;
+}
+.letter-salutation {
+  margin-bottom: 0.5em;
+}
+.letter-body {
+  white-space: pre-line;
+}
+.letter-ps {
+  margin-top: 0.75em;
+  font-style: italic;
+  color: #3a3a6a;
+}
+.letter-signoff {
+  margin-top: 1em;
+  text-align: right;
+  font-family: var(--font-hand);
+  font-size: 1.45rem;
+  line-height: 1.2;
+}
+
+/* ── Your reply ────────────────────────────────────────────────────────── */
+.reply {
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 2px dashed var(--ink-faint);
+}
+.reply-title {
+  font-family: var(--font-headline);
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+}
+.options {
+  display: grid;
+  gap: 10px;
+}
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  line-height: 1.35;
+  background: #fffdf5;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 2px 2px 0 var(--ink);
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    background-color 0.12s ease,
+    box-shadow 0.12s ease;
+}
+.option:hover {
+  background: #fff4cf;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.option-key {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  font-family: var(--font-type);
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+}
+.option.is-selected {
+  background: var(--highlight);
+  box-shadow: 3px 3px 0 var(--stamp-red);
+}
+.option.is-selected .option-key {
+  background: var(--ink);
+  color: var(--paper);
+}

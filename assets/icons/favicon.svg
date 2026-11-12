@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Folded newspaper with a coffee ring. Original work, MIT licensed with the project. -->
+  <rect x="6" y="10" width="44" height="46" rx="3" fill="#f3ead3" stroke="#2a241e" stroke-width="3"/>
+  <path d="M50 18h6v34a4 4 0 0 1-8 0" fill="#e4d6b2" stroke="#2a241e" stroke-width="3"/>
+  <rect x="12" y="16" width="32" height="7" fill="#2a241e"/>
+  <path d="M12 29h32M12 35h20M12 41h20M12 47h32" stroke="#2a241e" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="40" cy="40" r="9" fill="none" stroke="#8a5a36" stroke-width="2.5" opacity=".75"/>
+</svg>

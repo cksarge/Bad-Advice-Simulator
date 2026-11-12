@@ -1,0 +1,138 @@
+/* dashboard.css — the stat meters pinned to the top of the screen. */
+
+.dashboard {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px 20px;
+  padding: 8px var(--gutter);
+  padding-top: max(8px, env(safe-area-inset-top));
+  background: var(--paper) var(--paper-texture);
+  border-bottom: 3px double var(--rule);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.dash-brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.dash-masthead {
+  font-family: var(--font-masthead);
+  font-size: 1.45rem;
+}
+.dash-day {
+  font-family: var(--font-type);
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.meters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  max-width: 720px;
+  width: 100%;
+  justify-self: center;
+}
+
+.meter {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "label value"
+    "track track";
+  align-items: center;
+  gap: 2px 8px;
+  --meter-color: var(--ink);
+}
+.meter[data-stat="readership"] {
+  --meter-color: var(--c-readership);
+}
+.meter[data-stat="reputation"] {
+  --meter-color: var(--c-reputation);
+}
+.meter[data-stat="chaos"] {
+  --meter-color: var(--c-chaos);
+}
+.meter-label {
+  grid-area: label;
+  font-family: var(--font-type);
+  font-size: 0.82rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.meter-value {
+  grid-area: value;
+  font-family: var(--font-headline);
+  font-weight: 900;
+  font-size: 1.05rem;
+  color: var(--meter-color);
+  font-variant-numeric: tabular-nums;
+}
+.meter-track {
+  grid-area: track;
+  height: 12px;
+  border: 2px solid var(--ink);
+  border-radius: 2px;
+  background: repeating-linear-gradient(90deg, transparent 0 9%, rgba(0, 0, 0, 0.08) 9% 10%), var(--paper-2);
+  overflow: hidden;
+}
+.meter-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: repeating-linear-gradient(-45deg, var(--meter-color) 0 6px, color-mix(in srgb, var(--meter-color) 80%, white) 6px 12px);
+  transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+/* Warn when a stat that can end the game is low. (Low chaos is fine, so it never blinks.) */
+.meter.is-low:not([data-stat="chaos"]) .meter-value {
+  animation: blink 1s steps(2, start) infinite;
+}
+
+/* Floating +3 / −2 bubble when a stat changes. */
+.meter-bubble {
+  position: absolute;
+  right: 0;
+  top: -4px;
+  padding: 0 6px;
+  font-family: var(--font-headline);
+  font-weight: 900;
+  font-size: 0.95rem;
+  border-radius: 999px;
+  color: #fff;
+  pointer-events: none;
+  animation: bubble-up 1.8s ease-out forwards;
+}
+.meter-bubble.up {
+  background: var(--meter-color);
+}
+.meter-bubble.down {
+  background: var(--ink);
+}
+
+/* Phones: brand on top, meters full width underneath. */
+@media (max-width: 720px) {
+  .dashboard {
+    grid-template-columns: 1fr auto;
+    gap: 6px 12px;
+  }
+  .dash-brand {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .meters {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    gap: 10px;
+  }
+  .meter-label {
+    font-size: 0.72rem;
+  }
+}

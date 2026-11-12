@@ -1,0 +1,262 @@
+/* base.css — design tokens, reset, page background, buttons and dialogs. */
+
+:root {
+  /* Paper + ink */
+  --paper: #f4ecd6;
+  --paper-2: #ece0c2;
+  --paper-edge: #d6c49a;
+  --ink: #2a241e;
+  --ink-soft: #5b5145;
+  --ink-faint: #8a7d6b;
+  --rule: #3a3129;
+
+  /* Accents */
+  --stamp-red: #b0281d;
+  --stamp-green: #2e6a3b;
+  --stamp-blue: #24508a;
+  --highlight: #f4d36b;
+  --sticky: #f7e27a;
+
+  /* The desk */
+  --wood-dark: #3b2a1e;
+  --wood: #5e3f28;
+  --wood-light: #7a5536;
+  --coffee: rgba(110, 72, 40, 0.38);
+
+  /* Stats */
+  --c-readership: #24508a;
+  --c-reputation: #2e6a3b;
+  --c-chaos: #c2410c;
+
+  /* Type */
+  --font-masthead: "UnifrakturCook", "Old English Text MT", "Times New Roman", serif;
+  --font-headline: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body: "Old Standard TT", Georgia, "Times New Roman", serif;
+  --font-type: "Special Elite", "Courier New", Courier, monospace;
+  --font-hand: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+
+  --radius: 4px;
+  --shadow-paper: 0 1px 1px rgba(0, 0, 0, 0.15), 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lift: 0 2px 2px rgba(0, 0, 0, 0.2), 0 14px 30px rgba(0, 0, 0, 0.4);
+  --gutter: clamp(12px, 3vw, 28px);
+
+  --paper-texture: url("../assets/textures/paper-grain.svg");
+  color-scheme: light;
+}
+
+/* ── Reset ─────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure,
+fieldset {
+  margin: 0;
+}
+ul,
+ol {
+  padding: 0;
+}
+fieldset {
+  border: 0;
+  padding: 0;
+}
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+[hidden] {
+  display: none !important;
+}
+
+/* ── Page = the wooden desk ────────────────────────────────────────────── */
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--ink);
+  background-color: var(--wood);
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 220, 160, 0.18), transparent 60%),
+    radial-gradient(ellipse at 50% 120%, rgba(0, 0, 0, 0.45), transparent 60%),
+    url("../assets/textures/wood-grain.svg"),
+    linear-gradient(90deg, var(--wood-dark), var(--wood) 18%, var(--wood-light) 50%, var(--wood) 82%, var(--wood-dark));
+  background-size: auto, auto, 600px 300px, auto;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+.screen {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: var(--gutter) var(--gutter) calc(var(--gutter) * 2);
+}
+.screen:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--highlight);
+  outline-offset: 3px;
+}
+
+/* ── Buttons ───────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 44px;
+  padding: 10px 20px;
+  font-family: var(--font-type);
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 3px 3px 0 var(--ink);
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    background-color 0.12s ease;
+  text-align: center;
+  touch-action: manipulation;
+}
+.btn small {
+  font-size: 0.78rem;
+  opacity: 0.8;
+}
+.btn:hover:not(:disabled) {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+  background: #fff8e6;
+}
+.btn:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+.btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 3px 3px 0 var(--stamp-red);
+}
+.btn-primary:hover:not(:disabled) {
+  background: #3d342b;
+  box-shadow: 4px 4px 0 var(--stamp-red);
+}
+.btn-danger {
+  color: var(--stamp-red);
+  border-color: var(--stamp-red);
+  box-shadow: 3px 3px 0 var(--stamp-red);
+}
+.btn-ghost {
+  background: transparent;
+  box-shadow: none;
+  border-style: dashed;
+}
+.btn-ghost:hover:not(:disabled) {
+  box-shadow: none;
+}
+.btn-big {
+  font-size: 1.15rem;
+  padding: 14px 28px;
+}
+
+.icon-button {
+  width: 44px;
+  height: 44px;
+  font-size: 1.4rem;
+  line-height: 1;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* ── Dialogs ───────────────────────────────────────────────────────────── */
+dialog {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  max-width: calc(100vw - 24px);
+  max-height: calc(100dvh - 24px);
+}
+dialog::backdrop {
+  background: rgba(20, 12, 6, 0.62);
+  backdrop-filter: blur(2px);
+}
+
+.menu-paper,
+.confirm-paper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: min(360px, calc(100vw - 32px));
+  padding: 28px 24px 24px;
+  background: var(--paper) var(--paper-texture);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lift);
+}
+.menu-title {
+  font-family: var(--font-headline);
+  font-size: 1.8rem;
+  text-align: center;
+  border-bottom: 3px double var(--rule);
+  padding-bottom: 6px;
+}
+.confirm-paper p {
+  font-size: 1.15rem;
+}
+.confirm-paper .form-actions {
+  margin-top: 8px;
+}
+
+.note {
+  font-size: 0.9rem;
+  color: var(--stamp-red);
+}
+
+.noscript {
+  max-width: 480px;
+  margin: 15vh auto;
+  padding: 24px;
+  background: var(--paper);
+  font-family: var(--font-type);
+}

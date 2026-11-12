@@ -1,0 +1,12 @@
+# OS clutter
+.DS_Store
+Thumbs.db
+
+# Editors / IDEs
+.idea/
+.vscode/
+*.swp
+
+# Dependencies & logs (not needed: this project has no build step)
+node_modules/
+npm-debug.log*
